@@ -28,11 +28,12 @@ class UserModel extends Model
 
     // Validación (opcional) si quieres definir reglas aquí
     protected $validationRules = [
-        'email'    => 'required|valid_email|is_unique[users.email,id,{id}]',
-        'password' => 'required|min_length[6]',
+        'email' => 'required|valid_email|is_unique[users.email]',
+        'password' => 'permit_empty|min_length[6]',
         'name'     => 'required'
     ];
-
+    // 'email'    => 'required|valid_email|is_unique[users.email,id,{id}]',
+    
     protected $validationMessages = [
         'email' => [
             'required'    => 'El campo correo es obligatorio',

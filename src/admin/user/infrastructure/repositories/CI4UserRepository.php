@@ -20,7 +20,7 @@ class CI4UserRepository implements UserRepositoryInterface
 
     public function findById(int $id): ?User
     {
-        $userData = $this->userModel->find($id);
+        $userData = $this->userModel->find($id);    
         if (!$userData) {
             return null;
         }
@@ -34,12 +34,30 @@ class CI4UserRepository implements UserRepositoryInterface
 
     public function save(User $user): void
     {
-        $data = [
+        
+         $data = [
             'id'    => $user->id(),
             'name'  => $user->name()->value(),
             'email' => $user->email()->value()
         ];
-        
-        $this->userModel->save($data);
+
+        $existing = $this->userModel->find($user->id());
+
+        if ($existing) {
+            $this->userModel->update($user->id(), $data);
+            log_message('info', 'Usuario actualizado: ' . print_r($data, true));
+        } else {
+            $this->userModel->insert($data);
+            log_message('info', 'Usuario creado: ' . print_r($data, true));
+        }
+
+        log_message('info', 'Última consulta SQL: ' . $this->userModel->db->getLastQuery());
+        log_message('info', 'Errores del modelo: ' . print_r($this->userModel->errors(), true));
+
+        log_message('info', 'Insertando usuario: ' . print_r($data, true));
+
+        // Opcional: no retornes nada, aunque quieras saber el ID, habría que obtenerlo por otro medio.
     }
+
+  
 }

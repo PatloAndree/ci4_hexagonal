@@ -4,6 +4,8 @@ use CodeIgniter\Router\RouteCollection;
 use App\Controllers\PageController;
 use App\Controllers\UserController;
 use Src\admin\user\infrastructure\controllers\GetUserByIdGETControllerci4;
+use Src\admin\user\infrastructure\controllers\CreateUserPOSTControllerci4;
+
 
 
 /**
@@ -22,5 +24,7 @@ $routes->get('/users/(:num)', [UserController::class, 'show/$1']);
 
 $routes->group('api', function($routes) {
     $routes->get('users/(:num)', [GetUserByIdGETControllerci4::class, 'show']);
+    $routes->post('users/store', [CreateUserPOSTControllerci4::class, 'create']);
+
 
 });
