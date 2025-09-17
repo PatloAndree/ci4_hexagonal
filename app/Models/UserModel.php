@@ -16,7 +16,8 @@ class UserModel extends Model
     protected $allowedFields    = [
         'email',
         'password',
-        'name',           // puedes tener nombre u otros campos que quieras
+        'name',
+        'status',           // puedes tener nombre u otros campos que quieras
         'created_at',
         'updated_at'
     ];
@@ -27,8 +28,10 @@ class UserModel extends Model
     protected $updatedField  = 'updated_at';
 
     // Validación (opcional) si quieres definir reglas aquí
+        // 'email' => 'required|valid_email|is_unique[users.email]',
+
     protected $validationRules = [
-        'email' => 'required|valid_email|is_unique[users.email]',
+        'email'    => 'required|valid_email|',
         'password' => 'permit_empty|min_length[6]',
         'name'     => 'required'
     ];

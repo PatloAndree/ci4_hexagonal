@@ -12,13 +12,22 @@ use Src\admin\user\infrastructure\controllers\CreateUserPOSTControllerci4;
  * @var RouteCollection $routes
  */
 
-$routes->get('/', 'Home::index');
-$routes->get('/pages', [PageController::class, 'index']);
+// $routes->get('/', 'Home::index');
+$routes->get('/', [PageController::class, 'index']);
+
+$routes->get('pages/usuarios', [PageController::class, 'usuarios']);
+$routes->get('pages/usuarios/list', [UserController::class, 'usuariosList']);
+$routes->get('pages/usuarios/editar/(:num)', [UserController::class, 'getUsuario']);  // para obtener data para el modal
+$routes->post('pages/usuarios/guardar', [UserController::class, 'guardarUsuario']);    // para guardar o editar
+$routes->post('pages/usuarios/eliminar', [UserController::class, 'eliminarUsuario']); 
+
+
+$routes->get('pages/vehiculos', [PageController::class, 'vehiculos']);
+
 
 // Rutas “normales” de usuarios (por ejemplo usadas por interfaz web)
-$routes->get('/users', [UserController::class, 'index']);
-$routes->get('/users/(:num)', [UserController::class, 'show/$1']);
-// puedes agregar rutas POST, PUT, DELETE si la web lo requiere
+// $routes->get('/users', [UserController::class, 'index']);
+// $routes->get('/users/(:num)', [UserController::class, 'show/$1']);
 
 // use Src\admin\user\infrastructure\controllers\GetUserByIdGETController;
 

@@ -10,6 +10,23 @@ class PageController extends BaseController
     public function index()
     {
         //
-        return view('layout/page');
+        return view('layouts/home');
     }
+
+    public function usuarios()
+    {
+        $data = [
+            'title' => 'Usuarios | Mi Aplicación'
+        ];
+        return view('pages/usuarios', $data);
+    }
+
+    public function vehiculos()
+    {
+        $data = [
+            'title' => 'Vehículos | Mi Aplicación'
+        ];
+        return view('pages/vehiculos', $data);
+    }
+
 }
